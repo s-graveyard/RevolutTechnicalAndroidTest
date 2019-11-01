@@ -1,6 +1,7 @@
 package np.com.sanjaygubaju.revolut.data.remote
 
 import io.reactivex.Single
+import np.com.sanjaygubaju.revolut.data.models.CurrencyRates
 import retrofit2.http.GET
 import retrofit2.http.Query
 

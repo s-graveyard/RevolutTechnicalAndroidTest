@@ -3,15 +3,21 @@ package np.com.sanjaygubaju.revolut.di.module
 import dagger.Module
 import dagger.Provides
 import np.com.sanjaygubaju.revolut.BuildConfig
+import np.com.sanjaygubaju.revolut.data.CurrencyDataSource
+import np.com.sanjaygubaju.revolut.data.CurrencyRepository
 import np.com.sanjaygubaju.revolut.data.remote.ApiService
+import np.com.sanjaygubaju.revolut.data.remote.CurrencyRemoteDataSource
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Named
 
 @Module
 class DataModule {
+
+    // ---------------------------------------------------------------------------------------------------------------
 
     @Provides
     fun providesOkHttpClient(): OkHttpClient {
@@ -38,5 +44,21 @@ class DataModule {
 
         return retrofit.create(ApiService::class.java);
     }
+
+    // ---------------------------------------------------------------------------------------------------------------
+
+    @Named("Remote")
+    @Provides
+    internal fun providesRemoteCurrencyRepository(apiService: ApiService): CurrencyDataSource {
+        return CurrencyRemoteDataSource(apiService)
+    }
+
+    @Named("Combined")
+    @Provides
+    internal fun providesCurrencyRepository(@Named("Remote") remoteSource: CurrencyDataSource): CurrencyDataSource {
+        return CurrencyRepository(remoteSource)
+    }
+
+    // ---------------------------------------------------------------------------------------------------------------
 
 }

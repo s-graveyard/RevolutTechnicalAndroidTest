@@ -1,4 +1,4 @@
-package np.com.sanjaygubaju.revolut.data.remote
+package np.com.sanjaygubaju.revolut.data.models
 
 import com.google.gson.annotations.SerializedName
 
