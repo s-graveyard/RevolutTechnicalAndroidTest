@@ -7,10 +7,10 @@ import dagger.android.AndroidInjectionModule
 import np.com.sanjaygubaju.revolut.MainApp
 import np.com.sanjaygubaju.revolut.di.builder.ActivityBuilder
 import np.com.sanjaygubaju.revolut.di.module.AppModule
+import np.com.sanjaygubaju.revolut.di.module.CurrencyRepositoryModule
 import np.com.sanjaygubaju.revolut.di.module.DataModule
 import np.com.sanjaygubaju.revolut.di.module.RxModule
 import javax.inject.Singleton
-
 
 @Singleton
 @Component(
@@ -18,6 +18,7 @@ import javax.inject.Singleton
         AndroidInjectionModule::class,
         AppModule::class,
         DataModule::class,
+        CurrencyRepositoryModule::class,
         RxModule::class,
         ActivityBuilder::class
     ]
@@ -25,7 +26,7 @@ import javax.inject.Singleton
 interface AppComponent {
     @Component.Builder
     interface Builder {
-        
+
         @BindsInstance
         fun application(app: Application): Builder
 

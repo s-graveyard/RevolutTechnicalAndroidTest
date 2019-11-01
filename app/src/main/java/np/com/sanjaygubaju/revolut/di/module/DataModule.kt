@@ -6,7 +6,6 @@ import np.com.sanjaygubaju.revolut.BuildConfig
 import np.com.sanjaygubaju.revolut.data.CurrencyDataSource
 import np.com.sanjaygubaju.revolut.data.CurrencyRepository
 import np.com.sanjaygubaju.revolut.data.remote.ApiService
-import np.com.sanjaygubaju.revolut.data.remote.CurrencyRemoteDataSource
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -46,12 +45,6 @@ class DataModule {
     }
 
     // ---------------------------------------------------------------------------------------------------------------
-
-    @Named("Remote")
-    @Provides
-    internal fun providesRemoteCurrencyRepository(apiService: ApiService): CurrencyDataSource {
-        return CurrencyRemoteDataSource(apiService)
-    }
 
     @Named("Combined")
     @Provides
