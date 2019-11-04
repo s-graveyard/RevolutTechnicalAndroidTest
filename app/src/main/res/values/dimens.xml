@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <dimen name="thumb_country_size">40dp</dimen>
+
+    <dimen name="spacing_size">16dp</dimen>
+    <dimen name="large_spacing_size">56dp</dimen>
+
+    <dimen name="text_size_title">20sp</dimen>
+    <dimen name="text_size_head">16sp</dimen>
+    <dimen name="text_size_subHead">14sp</dimen>
+
+</resources>

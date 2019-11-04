@@ -1,7 +1,5 @@
 package np.com.sanjaygubaju.revolut.data
 
-import np.com.sanjaygubaju.revolut.data.CurrencyDataSource
-import np.com.sanjaygubaju.revolut.data.CurrencyRepository
 import np.com.sanjaygubaju.revolut.data.remote.FakeCurrencyRemoteDataSource
 import np.com.sanjaygubaju.revolut.utils.scheduler.SchedulerProvider
 import org.hamcrest.MatcherAssert.assertThat
@@ -43,7 +41,6 @@ class CurrencyRepositoryTest {
             .dispose()
 
         val response = testObserver.values()[0]
-        print(response)
         assertThat(response.base, `is`(countryCode))
     }
 

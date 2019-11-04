@@ -16,6 +16,11 @@ import javax.inject.Named
 @Module
 class DataModule {
 
+    companion object {
+        const val NAME_COMBINED = "_combined"
+        const val NAME_REMOTE = "_remote"
+    }
+
     // ---------------------------------------------------------------------------------------------------------------
 
     @Provides
@@ -46,9 +51,9 @@ class DataModule {
 
     // ---------------------------------------------------------------------------------------------------------------
 
-    @Named("Combined")
+    @Named(NAME_COMBINED)
     @Provides
-    internal fun providesCurrencyRepository(@Named("Remote") remoteSource: CurrencyDataSource): CurrencyDataSource {
+    internal fun providesCurrencyRepository(@Named(NAME_REMOTE) remoteSource: CurrencyDataSource): CurrencyDataSource {
         return CurrencyRepository(remoteSource)
     }
 
