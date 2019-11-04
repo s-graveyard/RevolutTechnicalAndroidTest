@@ -29,6 +29,11 @@ class HomeViewModel(
     val loading: LiveData<Boolean>
         get() = _loading
 
+    // Error
+    private val _error = MutableLiveData<Boolean>()
+    val error: LiveData<Boolean>
+        get() = _error
+
     // Message
     private val _message = MutableLiveData<String>()
     val message: LiveData<String>
@@ -38,18 +43,20 @@ class HomeViewModel(
     private var selectedCurrency: Currency = Currency("EUR", "EUR", 1.0)
 
     // Load currency
-    fun loadCurrency(forceUpdate: Boolean) {
+    fun loadCurrency(forceUpdate: Boolean = true) {
 
         if (forceUpdate) {
             _loading.value = true
         }
 
+        _error.value = false
         disposables.clear()
 
         disposables.add(
             currencyDataSource.getCurrencyRate(selectedCurrency.code)
                 .subscribeOn(schedulerProvider.io())
                 .repeatWhen {
+                    // Request new rate every 1 seconds.
                     it.delay(1, TimeUnit.SECONDS)
                 }
                 .observeOn(schedulerProvider.ui())
@@ -73,11 +80,9 @@ class HomeViewModel(
                         // Update.
                         _currencyList.value = tempCurrencyList
 
-                        // Success Message
-                        _message.value = "Success"
-
                         // Not loading
                         _loading.value = false
+                        _error.value = false
                     },
                     { throwable ->
 
@@ -86,6 +91,7 @@ class HomeViewModel(
 
                         // Not loading
                         _loading.value = false
+                        _error.value = true
                     }
                 )
         )
@@ -125,6 +131,12 @@ class HomeViewModel(
 
         // Reload currency.
         loadCurrency(false)
+    }
+
+    fun connectionNotAvailable() {
+        _loading.value = false
+        _error.value = true
+        _message.value = "Internet connection not available"
     }
 
     override fun onCleared() {

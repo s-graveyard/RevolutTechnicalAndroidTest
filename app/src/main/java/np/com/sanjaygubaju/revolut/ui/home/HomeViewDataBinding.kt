@@ -3,15 +3,16 @@ package np.com.sanjaygubaju.revolut.ui.home
 import android.content.res.Resources
 import android.graphics.drawable.GradientDrawable
 import android.view.View
+import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.ProgressBar
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SimpleItemAnimator
 import np.com.sanjaygubaju.revolut.R
 import np.com.sanjaygubaju.revolut.data.models.Currency
+import np.com.sanjaygubaju.revolut.utils.isOnline
 import java.text.DecimalFormat
 import java.util.*
 
@@ -58,6 +59,18 @@ fun EditText.setCurrency(currency: Currency) {
 }
 
 @BindingAdapter("app:visibility")
-fun ProgressBar.changeVisibility(visibility: Boolean) {
+fun View.changeVisibility(visibility: Boolean) {
     setVisibility(if (visibility) View.VISIBLE else View.GONE)
+}
+
+@BindingAdapter("app:clickItem")
+fun Button.handleClick(viewModel: HomeViewModel) {
+    this.setOnClickListener {
+
+        if (!isOnline()) {
+            viewModel.connectionNotAvailable()
+        } else {
+            viewModel.loadCurrency(true)
+        }
+    }
 }

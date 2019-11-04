@@ -4,7 +4,6 @@ import dagger.Module
 import dagger.Provides
 import np.com.sanjaygubaju.revolut.data.CurrencyDataSource
 import np.com.sanjaygubaju.revolut.di.module.DataModule.Companion.NAME_COMBINED
-import np.com.sanjaygubaju.revolut.ui.home.HomeViewModel
 import np.com.sanjaygubaju.revolut.utils.scheduler.BaseSchedulerProvider
 import javax.inject.Named
 

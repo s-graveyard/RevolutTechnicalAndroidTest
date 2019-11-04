@@ -4,7 +4,5 @@
     <string name="home_title">Rates</string>
     <string name="hint_zero">0.00</string>
 
-    <string name="error_no_internet">No internet connection.</string>
-
     <string name="action_retry">Retry Again.</string>
 </resources>

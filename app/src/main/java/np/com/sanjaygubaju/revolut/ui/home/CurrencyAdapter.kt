@@ -15,8 +15,7 @@ import np.com.sanjaygubaju.revolut.databinding.ListItemCurrencyBinding
  * Currency recycler view adapter
  **/
 class CurrencyAdapter(
-    private val viewModel: HomeViewModel,
-    private val layoutManger: RecyclerView.LayoutManager?
+    private val viewModel: HomeViewModel
 ) : ListAdapter<Currency, CurrencyAdapter.CurrencyViewHolder>(CurrencyDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrencyViewHolder {
@@ -36,11 +35,6 @@ class CurrencyAdapter(
                 }
             }
         })
-    }
-
-    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
-        super.onAttachedToRecyclerView(recyclerView)
-
     }
 
     /**
@@ -108,7 +102,7 @@ class CurrencyAdapter(
  **/
 class CurrencyDiffCallback : DiffUtil.ItemCallback<Currency>() {
     override fun areItemsTheSame(oldItem: Currency, newItem: Currency): Boolean {
-        return oldItem.code == newItem.code /*&& oldItem.amount == newItem.amount*/
+        return oldItem.code == newItem.code
     }
 
     override fun areContentsTheSame(oldItem: Currency, newItem: Currency): Boolean {

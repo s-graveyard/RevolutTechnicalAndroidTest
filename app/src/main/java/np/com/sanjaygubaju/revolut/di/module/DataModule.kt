@@ -25,7 +25,7 @@ class DataModule {
 
     @Provides
     fun providesOkHttpClient(): OkHttpClient {
-        val okHttpBuilder = OkHttpClient.Builder();
+        val okHttpBuilder = OkHttpClient.Builder()
 
         // Connection timeout
         okHttpBuilder.connectTimeout(1, TimeUnit.MINUTES)
@@ -46,7 +46,7 @@ class DataModule {
             .client(okHttpClient)
             .build()
 
-        return retrofit.create(ApiService::class.java);
+        return retrofit.create(ApiService::class.java)
     }
 
     // ---------------------------------------------------------------------------------------------------------------

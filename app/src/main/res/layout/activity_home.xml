@@ -42,6 +42,18 @@
             tools:targetApi="lollipop"
             tools:visibility="visible" />
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/activity_home_retry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/action_retry"
+            app:clickItem="@{viewModel}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibility="@{viewModel.error}" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/activity_home_list"
             android:layout_width="match_parent"
