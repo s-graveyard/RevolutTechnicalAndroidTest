@@ -1,6 +1,7 @@
 package np.com.sanjaygubaju.revolut.ui.home
 
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -18,6 +19,11 @@ class HomeActivity : DaggerAppCompatActivity() {
     lateinit var viewModel: HomeViewModel
 
     private lateinit var binding: ActivityHomeBinding
+
+    companion object {
+        const val LIST_STATE_KEY = "_list_state_key"
+        var listState: Bundle? = null
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,4 +64,40 @@ class HomeActivity : DaggerAppCompatActivity() {
             Snackbar.make(rootView, value ?: "Unknown Error", Snackbar.LENGTH_LONG).show()
         })
     }
+
+    override fun onSaveInstanceState(state: Bundle) {
+        super.onSaveInstanceState(state)
+
+        // Currency list state
+
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        // Save recycler view state.
+        listState = Bundle()
+        listState?.putParcelable(
+            LIST_STATE_KEY,
+            binding.activityHomeList.layoutManager?.onSaveInstanceState()
+        )
+    }
+
+    override fun onRestoreInstanceState(state: Bundle) {
+        super.onRestoreInstanceState(state)
+
+        // get state
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        // Restore state
+        val state: Parcelable? = listState?.getParcelable(LIST_STATE_KEY)
+        if (state != null) {
+            binding.activityHomeList.layoutManager?.onRestoreInstanceState(state)
+        }
+    }
+
 }

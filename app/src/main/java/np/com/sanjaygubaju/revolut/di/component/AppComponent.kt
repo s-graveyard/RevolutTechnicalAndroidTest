@@ -6,10 +6,7 @@ import dagger.Component
 import dagger.android.AndroidInjectionModule
 import np.com.sanjaygubaju.revolut.MainApp
 import np.com.sanjaygubaju.revolut.di.builder.ActivityBuilder
-import np.com.sanjaygubaju.revolut.di.module.AppModule
-import np.com.sanjaygubaju.revolut.di.module.CurrencyRepositoryModule
-import np.com.sanjaygubaju.revolut.di.module.DataModule
-import np.com.sanjaygubaju.revolut.di.module.RxModule
+import np.com.sanjaygubaju.revolut.di.module.*
 import javax.inject.Singleton
 
 @Singleton
@@ -20,7 +17,8 @@ import javax.inject.Singleton
         DataModule::class,
         CurrencyRepositoryModule::class,
         RxModule::class,
-        ActivityBuilder::class
+        ActivityBuilder::class,
+        ViewModelModule::class
     ]
 )
 interface AppComponent {

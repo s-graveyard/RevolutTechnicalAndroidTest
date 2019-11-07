@@ -39,6 +39,11 @@ class HomeViewModel(
     val message: LiveData<String>
         get() = _message
 
+    // App State
+    private val _isForeground = MutableLiveData<Boolean>()
+    val isForeground: LiveData<Boolean>
+        get() = _isForeground
+
     // Default currency
     private var selectedCurrency: Currency = Currency("EUR", "EUR", 1.0)
 
@@ -112,6 +117,7 @@ class HomeViewModel(
             // Add item to first index.
             currencyList.add(0, currency)
         } catch (error: IndexOutOfBoundsException) {
+            error.printStackTrace()
         }
 
         _currencyList.value = currencyList

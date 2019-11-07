@@ -29,9 +29,11 @@ class CurrencyAdapter(
         holder.bind(currency, object : CurrencyAdapterListener {
             override fun moveItem(pos: Int) {
                 viewModel.moveItemToTop(pos, currency)
+
                 try {
                     notifyItemChanged(pos, viewModel.currencyList)
                 } catch (error: IllegalStateException) {
+                    error.printStackTrace()
                 }
             }
         })
