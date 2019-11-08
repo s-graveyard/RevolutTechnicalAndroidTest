@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import np.com.sanjaygubaju.revolut.data.models.Currency
 import np.com.sanjaygubaju.revolut.databinding.ListItemCurrencyBinding
 
-
 /**
  * Currency recycler view adapter
  **/
@@ -28,7 +27,7 @@ class CurrencyAdapter(
         val currency = getItem(position)
         holder.bind(currency, object : CurrencyAdapterListener {
             override fun moveItem(pos: Int) {
-                viewModel.moveItemToTop(pos, currency)
+                viewModel.moveItemToTop(pos)
 
                 try {
                     notifyItemChanged(pos, viewModel.currencyList)

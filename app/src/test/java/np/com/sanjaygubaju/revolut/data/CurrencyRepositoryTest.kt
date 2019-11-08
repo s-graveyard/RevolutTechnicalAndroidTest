@@ -7,12 +7,13 @@ import org.hamcrest.Matchers.`is`
 import org.junit.Before
 import org.junit.Test
 import org.mockito.InjectMocks
+import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 
 class CurrencyRepositoryTest {
 
     @InjectMocks
-    private lateinit var currencyRemoteDataSource: FakeCurrencyRemoteDataSource
+    private lateinit var remoteDataSource: FakeCurrencyRemoteDataSource
 
     @InjectMocks
     private lateinit var scheduler: SchedulerProvider
@@ -24,11 +25,11 @@ class CurrencyRepositoryTest {
         MockitoAnnotations.initMocks(this)
 
         // Initialize repository
-        currencyRepository = CurrencyRepository(currencyRemoteDataSource)
+        currencyRepository = CurrencyRepository(remoteDataSource)
     }
 
     @Test
-    fun getCurrency_requestsCurrencyFromRemoteDataSource() {
+    fun get_currency_from_remote_data_source() {
 
         val countryCode = "EUR";
 
