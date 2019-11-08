@@ -14,6 +14,7 @@ import np.com.sanjaygubaju.revolut.R
 import np.com.sanjaygubaju.revolut.data.models.Currency
 import np.com.sanjaygubaju.revolut.utils.isOnline
 import java.text.DecimalFormat
+import java.text.DecimalFormatSymbols
 import java.util.*
 
 
@@ -51,7 +52,11 @@ fun ImageView.loadImage(code: String) {
 
 @BindingAdapter("app:currency")
 fun EditText.setCurrency(currency: Currency) {
-    val value = DecimalFormat("#.##").format(currency.amount)
+
+    // Resolves crash when changing locale different from US/UK
+    val symbols = DecimalFormatSymbols(Locale.US)
+
+    val value = DecimalFormat("#.##", symbols).format(currency.amount)
     setText(value)
 
     // Resolves glitch where cursor is on the left most end of the view.
