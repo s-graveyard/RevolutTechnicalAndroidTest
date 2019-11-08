@@ -50,12 +50,6 @@ class HomeActivity : DaggerAppCompatActivity() {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         }
 
-        // Load currency
-        if (!isOnline()) {
-            viewModel.connectionNotAvailable()
-        } else {
-            viewModel.loadCurrency(true)
-        }
     }
 
     private fun initializeSnackBar() {
@@ -63,13 +57,6 @@ class HomeActivity : DaggerAppCompatActivity() {
         viewModel.message.observe(this, Observer<String> { value ->
             Snackbar.make(rootView, value ?: "Unknown Error", Snackbar.LENGTH_LONG).show()
         })
-    }
-
-    override fun onSaveInstanceState(state: Bundle) {
-        super.onSaveInstanceState(state)
-
-        // Currency list state
-
     }
 
     override fun onPause() {
@@ -81,13 +68,9 @@ class HomeActivity : DaggerAppCompatActivity() {
             LIST_STATE_KEY,
             binding.activityHomeList.layoutManager?.onSaveInstanceState()
         )
-    }
 
-    override fun onRestoreInstanceState(state: Bundle) {
-        super.onRestoreInstanceState(state)
-
-        // get state
-
+        // Stop background services.
+        viewModel.clear()
     }
 
     override fun onResume() {
@@ -97,6 +80,18 @@ class HomeActivity : DaggerAppCompatActivity() {
         val state: Parcelable? = listState?.getParcelable(LIST_STATE_KEY)
         if (state != null) {
             binding.activityHomeList.layoutManager?.onRestoreInstanceState(state)
+        }
+
+        // Load currency
+        loadCurrency()
+
+    }
+
+    private fun loadCurrency() {
+        if (!isOnline()) {
+            viewModel.connectionNotAvailable()
+        } else {
+            viewModel.loadCurrency(true)
         }
     }
 

@@ -145,9 +145,8 @@ class HomeViewModel(
         _message.value = "Internet connection not available"
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        disposables.dispose()
+    fun clear() {
+        disposables.clear()
     }
 
 }
